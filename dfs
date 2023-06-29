@@ -1,0 +1,22 @@
+class Solution:
+    def isCyclic(self, v, adj):
+        def dfs(vis,path,i,adj):
+            vis[i]=1
+            path[i]=1
+            for val in adj[i]:
+                if vis[val]==0:
+                    if dfs(vis,path,val,adj):
+                        return True
+                else:
+                    if path[val]==1:
+                        return True
+            path[i]=0
+            return False
+                        
+        vis=[0]*v
+        path=[0]*v
+        for i in range(v):
+            if vis[i]==0:
+                if dfs(vis,path,i,adj):
+                    return True
+        return False
